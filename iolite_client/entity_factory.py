@@ -100,6 +100,20 @@ def _create_device(identifier: str, type_name: str, payload: dict):
                 heating_temperature_setting,
                 device_status,
             )
+        elif identifier.startswith("Heater_knx_"):
+            heating_temperature_setting = _get_prop(
+                properties, "heatingTemperatureSetting"
+            )
+            device_status = _get_prop(properties, "deviceStatus")
+            return InFloorValve(
+                identifier,
+                payload["friendlyName"],
+                place_identifier,
+                payload["manufacturer"],
+                current_env_temp,
+                heating_temperature_setting,
+                device_status,
+            )
 
         else:
             battery_level = _get_prop(properties, "batteryLevel")
